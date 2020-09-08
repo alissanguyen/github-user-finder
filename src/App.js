@@ -1,5 +1,4 @@
-import React, { useCallback } from "react";
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 
 function App() {
@@ -14,10 +13,17 @@ function App() {
           e.preventDefault();
           fetch(`https://api.github.com/users/${userInput}`)
             .then((result) => {
-              return result.json();
+              if (result.ok === true) {
+                return result.json();
+              } else {
+                throw new Error("Invalid response.");
+              }
             })
             .then((json) => {
               setFetchedUsers([json].concat(fetchedUsers));
+            })
+            .catch((error) => {
+              console.log(error);
             });
         }}
       >
@@ -46,9 +52,9 @@ const UserInfo = (props) => {
   return (
     <li className="userInfo">
       <h4>
-        {(props.fetchedUser.name
+        {props.fetchedUser.name
           ? props.fetchedUser.name
-          : props.fetchedUser.login)}
+          : props.fetchedUser.login}
       </h4>
 
       <a
@@ -59,15 +65,17 @@ const UserInfo = (props) => {
         {props.fetchedUser.html_url}
       </a>
 
-      <p>Company: {props.fetchedUser.company
-          ? props.fetchedUser.company
-          : "[Unemployed]"}</p>
-      <p>Location: {props.fetchedUser.location
+      <p>
+        Company:{" "}
+        {props.fetchedUser.company ? props.fetchedUser.company : "[Unemployed]"}
+      </p>
+      <p>
+        Location:{" "}
+        {props.fetchedUser.location
           ? props.fetchedUser.location
-          : "Alien"}</p>
-      <p>Bio: {props.fetchedUser.bio
-          ? props.fetchedUser.bio
-          : "N/A"}</p>
+          : "[No information]"}
+      </p>
+      <p>Bio: {props.fetchedUser.bio ? props.fetchedUser.bio : "N/A"}</p>
     </li>
   );
 };

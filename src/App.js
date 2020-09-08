@@ -46,10 +46,11 @@ const UserInfo = (props) => {
   return (
     <li className="userInfo">
       <h4>
-        {props.fetchedUser.name
+        {(props.fetchedUser.name
           ? props.fetchedUser.name
-          : props.fetchedUser.login}
+          : props.fetchedUser.login)}
       </h4>
+
       <a
         href={props.fetchedUser.html_url}
         target="_blank"
@@ -57,13 +58,16 @@ const UserInfo = (props) => {
       >
         {props.fetchedUser.html_url}
       </a>
-      <p>{props.fetchedUser.company
+
+      <p>Company: {props.fetchedUser.company
           ? props.fetchedUser.company
           : "[Unemployed]"}</p>
-      <p>{props.fetchedUser.location
+      <p>Location: {props.fetchedUser.location
           ? props.fetchedUser.location
           : "Alien"}</p>
-      
+      <p>Bio: {props.fetchedUser.bio
+          ? props.fetchedUser.bio
+          : "N/A"}</p>
     </li>
   );
 };

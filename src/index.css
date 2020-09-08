@@ -16,3 +16,7 @@ code {
   font-family: monospace;
   white-space: pre;
 }
+
+.App {
+  margin: 10;
+}

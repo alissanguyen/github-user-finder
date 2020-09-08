@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 function App() {
-  const [userInput, setUserInput] = React.useState("");
+  const [userInput, setUserInput] = React.useState("anveio");
 
   const [fetchedUsers, setFetchedUsers] = React.useState([]);
 
@@ -11,6 +11,7 @@ function App() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          setUserInput("");
           fetch(`https://api.github.com/users/${userInput}`)
             .then((result) => {
               if (result.ok === true) {
@@ -50,33 +51,40 @@ function App() {
 
 const UserInfo = (props) => {
   return (
-    <li className="userInfo">
-      <h4>
-        {props.fetchedUser.name
-          ? props.fetchedUser.name
-          : props.fetchedUser.login}
-      </h4>
+    <a
+      href={props.fetchedUser.html_url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <li className="userInfo">
+        <h4>
+          {props.fetchedUser.name
+            ? props.fetchedUser.name
+            : props.fetchedUser.login}
+        </h4>
+        <img
+          src={props.fetchedUser.avatar_url}
+          style={{ height: 100, width: 100, borderRadius: 150 / 2 }}
+          alt=""
+        />
 
-      <a
-        href={props.fetchedUser.html_url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
         {props.fetchedUser.html_url}
-      </a>
 
-      <p>
-        Company:{" "}
-        {props.fetchedUser.company ? props.fetchedUser.company : "[Unemployed]"}
-      </p>
-      <p>
-        Location:{" "}
-        {props.fetchedUser.location
-          ? props.fetchedUser.location
-          : "[No information]"}
-      </p>
-      <p>Bio: {props.fetchedUser.bio ? props.fetchedUser.bio : "N/A"}</p>
-    </li>
+        <p>
+          Company:{" "}
+          {props.fetchedUser.company
+            ? props.fetchedUser.company
+            : "[Unemployed]"}
+        </p>
+        <p>
+          Location:{" "}
+          {props.fetchedUser.location
+            ? props.fetchedUser.location
+            : "[No information]"}
+        </p>
+        <p>Bio: {props.fetchedUser.bio ? props.fetchedUser.bio : "N/A"}</p>
+      </li>
+    </a>
   );
 };
 

@@ -39,7 +39,7 @@ function App() {
       </form>
 
       {fetchedUsers.length > 0 ? (
-        <ul>
+        <ul className="users-container">
           {fetchedUsers.map((fetchedUser) => (
             <UserInfo fetchedUser={fetchedUser} />
           ))}
@@ -51,40 +51,55 @@ function App() {
 
 const UserInfo = (props) => {
   return (
-    <a
-      href={props.fetchedUser.html_url}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <li className="userInfo">
-        <h4>
-          {props.fetchedUser.name
-            ? props.fetchedUser.name
-            : props.fetchedUser.login}
-        </h4>
-        <img
-          src={props.fetchedUser.avatar_url}
-          style={{ height: 100, width: 100, borderRadius: 150 / 2 }}
-          alt=""
-        />
+    <li className="user-info word-wrap">
+      <a
+        href={props.fetchedUser.html_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="user-info-link"
+      >
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "auto 1fr",
+            gridGap: 20,
+          }}
+        >
+          <img
+            src={props.fetchedUser.avatar_url}
+            style={{ height: 100, width: 100, borderRadius: 150 / 2 }}
+            alt=""
+          />
 
-        {props.fetchedUser.html_url}
-
-        <p>
-          Company:{" "}
-          {props.fetchedUser.company
-            ? props.fetchedUser.company
-            : "[Unemployed]"}
-        </p>
-        <p>
-          Location:{" "}
-          {props.fetchedUser.location
-            ? props.fetchedUser.location
-            : "[No information]"}
-        </p>
-        <p>Bio: {props.fetchedUser.bio ? props.fetchedUser.bio : "N/A"}</p>
-      </li>
-    </a>
+          <div className="info-text-container">
+            <h4
+              style={{
+                marginTop: 0,
+              }}
+            >
+              {props.fetchedUser.name
+                ? props.fetchedUser.name
+                : props.fetchedUser.login}
+            </h4>
+            <p className="user-info-text">
+              Company:{" "}
+              {props.fetchedUser.company
+                ? props.fetchedUser.company
+                : "[Unemployed]"}
+            </p>
+            <p className="user-info-text">
+              Location:{" "}
+              {props.fetchedUser.location
+                ? props.fetchedUser.location
+                : "[No information]"}
+            </p>
+            <p className="user-info-text">
+              Bio: {props.fetchedUser.bio ? props.fetchedUser.bio : "N/A"}
+            </p>
+          </div>
+        </div>
+      </a>
+    </li>
   );
 };
 

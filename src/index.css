@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f2fff7;
 }
 
 code {
@@ -12,12 +13,38 @@ code {
     monospace;
 }
 
-.userInfo {
+.users-container {
+  padding-left: 0px;
+  margin: 15px;
+}
+
+.user-info {
   font-family: monospace;
   white-space: pre;
   list-style: none;
+  border: 2px gray solid;
+  background-color: #aefbd1;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.user-info-link {
+  color: inherit;
+  text-decoration: none;
 }
 
 .App {
   margin: 10;
+}
+
+.user-info-text:last-child {
+  margin-block-end: 0px;
+}
+
+/* Copied from https://stackoverflow.com/questions/12777034/text-overflowing-the-sides-of-its-container-div */
+p {
+  display: block;
+  white-space: pre-wrap; /* Webkit */
+  word-wrap: break-word; /* IE */
 }

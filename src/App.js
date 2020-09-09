@@ -1,14 +1,17 @@
 import React from "react";
 import "./App.css";
+import { TEST_DATA } from "./test-data";
 
 function App() {
   const [userInput, setUserInput] = React.useState("anveio");
 
-  const [fetchedUsers, setFetchedUsers] = React.useState([]);
+  const [fetchedUsers, setFetchedUsers] = React.useState(
+    Array.from(new Array(10).keys()).map(() => TEST_DATA)
+  );
 
   return (
     <div className="App">
-      <form
+      <form className="username-form"
         onSubmit={(e) => {
           e.preventDefault();
           setUserInput("");
@@ -27,18 +30,22 @@ function App() {
               console.log(error);
             });
         }}
-      > 
-      <div>
-        <span className="question-title">Type in GitHub user you want to find :)</span>
-      </div>
+      >
+        <div>
+          <span className="question-title">
+            Type in GitHub user you want to find :)
+          </span>
+        </div>
+        <div>
         <input
-          placeholder="Type in GitHub username"
+          placeholder="example: alissanguyen"
           value={userInput}
           onChange={(e) => {
             setUserInput(e.target.value);
           }}
         ></input>
         <button type="submit">Find User</button>
+        </div>
       </form>
 
       {fetchedUsers.length > 0 ? (

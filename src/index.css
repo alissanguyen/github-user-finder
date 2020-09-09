@@ -1,7 +1,13 @@
 .question-title {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
+  font-size: x-large;
 }
 
+.username-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -11,7 +17,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url("https://cdn.wallpapersafari.com/93/74/aKifdU.jpg");
   background-size: cover;
-  background-color: #f2fff7;
+  /* background-color: #f2fff7; */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 code {
@@ -21,7 +29,10 @@ code {
 
 .users-container {
   padding-left: 0px;
-  margin: 15px;
+  margin: 15px auto;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
   background: inherit;
 }
 
@@ -31,7 +42,7 @@ code {
   list-style: none;
   border: 2px white solid;
   /* background-color: #aefbd1; */
-  box-shadow: inset 0 0 2000px rgba(270, 255, 255, .6);
+  box-shadow: inset 0 0 2000px rgba(270, 255, 255, 0.6);
   background-blend-mode: screen;
   padding: 10px;
   border-radius: 5px;
@@ -44,7 +55,7 @@ code {
 }
 
 .App {
-  margin: 10;
+  margin: 10px auto;
 }
 
 .user-info-text:last-child {

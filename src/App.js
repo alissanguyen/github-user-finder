@@ -1,10 +1,32 @@
 import React from "react";
 import "./App.css";
+import emptyStateIllustration from "./undraw_Posts_re_ormv.svg";
 
 function App() {
   const [userInput, setUserInput] = React.useState("anveio");
 
   const [fetchedUsers, setFetchedUsers] = React.useState([]);
+
+  const getUserFromGithub = (username) => {
+    fetch(`https://api.github.com/users/${username}`)
+      .then((result) => {
+        if (result.ok === true) {
+          return result.json();
+        } else {
+          throw new Error("Invalid response.");
+        }
+      })
+      .then((json) => {
+        setFetchedUsers([json].concat(fetchedUsers));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  function onLoadExampleButtonClick() {
+    getUserFromGithub("alissanguyen");
+  }
 
   return (
     <div className="App">
@@ -14,20 +36,7 @@ function App() {
           onSubmit={(e) => {
             e.preventDefault();
             setUserInput("");
-            fetch(`https://api.github.com/users/${userInput}`)
-              .then((result) => {
-                if (result.ok === true) {
-                  return result.json();
-                } else {
-                  throw new Error("Invalid response.");
-                }
-              })
-              .then((json) => {
-                setFetchedUsers([json].concat(fetchedUsers));
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+            getUserFromGithub(userInput);
           }}
         >
           <label id="title" for="github-username-input">
@@ -42,7 +51,7 @@ function App() {
                 setUserInput(e.target.value);
               }}
             ></input>
-            <button className="form-submit-button" type="submit">
+            <button className="button" type="submit">
               Find User
             </button>
           </div>
@@ -55,16 +64,32 @@ function App() {
             <UserInfo fetchedUser={fetchedUser} />
           ))}
         </ul>
-      ) : <EmptyState></EmptyState>}
+      ) : (
+        <EmptyState
+          onLoadExampleButtonClick={onLoadExampleButtonClick}
+        ></EmptyState>
+      )}
     </div>
   );
 }
 
 const EmptyState = (props) => {
   return (
-    <p>Type a user into the text box to find their GitHub profile</p>
-  )
-}
+    <div>
+      <p>Type a user into the text box to find their GitHub profile</p>
+      <img id="empty-state-illustration" src={emptyStateIllustration} alt="" />
+      <button
+        className="button"
+        onClick={() => {
+          props.onLoadExampleButtonClick();
+        }}
+      >
+        Load Example
+      </button>
+    </div>
+  );
+};
+
 const UserInfo = (props) => {
   return (
     <li className="user-info word-wrap">

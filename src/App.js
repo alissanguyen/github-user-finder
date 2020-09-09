@@ -27,7 +27,10 @@ function App() {
               console.log(error);
             });
         }}
-      >
+      > 
+      <div>
+        <span className="question-title">Type in GitHub user you want to find :)</span>
+      </div>
         <input
           placeholder="Type in GitHub username"
           value={userInput}

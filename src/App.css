@@ -1,0 +1,73 @@
+#top-nav {
+  background-color: #113d5e;
+  padding: 10px 0;
+}
+
+.form-submit-button {
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 10px;
+  position: relative;
+  white-space: nowrap;
+  z-index: 2;
+  border: none;
+  border-radius: 2px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  font-size: 16px;
+
+  /** Colors**/
+  background-image: linear-gradient(90deg, #13e0e4, #0060b3);
+}
+
+.form-submit-button:hover {
+  background-image: linear-gradient(90deg, #3e4ee0, #526bf4);
+}
+
+#title {
+  font-family: "Share Tech Mono", monospace;
+  color: white;
+  text-transform: lowercase;
+  font-size: 2.5rem;
+}
+
+.form-inputs-container {
+  display: flex;
+  align-items: stretch;
+}
+
+@media screen and (min-width: 900px) {
+  .username-form {
+    position: relative;
+  }
+
+  .form-inputs-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .form-inputs-container {
+    position: fixed;
+    bottom: 0px;
+    background-color: #113d5e;
+    padding: 10px 0;
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+  }
+}
+
+#github-username-input {
+  border-radius: 2px;
+  border: 2px solid black;
+  margin-right: 10px;
+}

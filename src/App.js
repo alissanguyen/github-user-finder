@@ -1,52 +1,53 @@
 import React from "react";
 import "./App.css";
-import { TEST_DATA } from "./test-data";
 
 function App() {
   const [userInput, setUserInput] = React.useState("anveio");
 
-  const [fetchedUsers, setFetchedUsers] = React.useState(
-    Array.from(new Array(10).keys()).map(() => TEST_DATA)
-  );
+  const [fetchedUsers, setFetchedUsers] = React.useState([]);
 
   return (
     <div className="App">
-      <form className="username-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          setUserInput("");
-          fetch(`https://api.github.com/users/${userInput}`)
-            .then((result) => {
-              if (result.ok === true) {
-                return result.json();
-              } else {
-                throw new Error("Invalid response.");
-              }
-            })
-            .then((json) => {
-              setFetchedUsers([json].concat(fetchedUsers));
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }}
-      >
-        <div>
-          <span className="question-title">
-            Type in GitHub user you want to find :)
-          </span>
-        </div>
-        <div>
-        <input
-          placeholder="example: alissanguyen"
-          value={userInput}
-          onChange={(e) => {
-            setUserInput(e.target.value);
+      <nav id="top-nav">
+        <form
+          className="username-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setUserInput("");
+            fetch(`https://api.github.com/users/${userInput}`)
+              .then((result) => {
+                if (result.ok === true) {
+                  return result.json();
+                } else {
+                  throw new Error("Invalid response.");
+                }
+              })
+              .then((json) => {
+                setFetchedUsers([json].concat(fetchedUsers));
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           }}
-        ></input>
-        <button type="submit">Find User</button>
-        </div>
-      </form>
+        >
+          <label id="title" for="github-username-input">
+            GitHub spotter
+          </label>
+          <div className="form-inputs-container">
+            <input
+              id="github-username-input"
+              placeholder="Example: alissanguyen"
+              value={userInput}
+              onChange={(e) => {
+                setUserInput(e.target.value);
+              }}
+            ></input>
+            <button className="form-submit-button" type="submit">
+              Find User
+            </button>
+          </div>
+        </form>
+      </nav>
 
       {fetchedUsers.length > 0 ? (
         <ul className="users-container">
@@ -54,11 +55,16 @@ function App() {
             <UserInfo fetchedUser={fetchedUser} />
           ))}
         </ul>
-      ) : null}
+      ) : <EmptyState></EmptyState>}
     </div>
   );
 }
 
+const EmptyState = (props) => {
+  return (
+    <p>Type a user into the text box to find their GitHub profile</p>
+  )
+}
 const UserInfo = (props) => {
   return (
     <li className="user-info word-wrap">
@@ -95,7 +101,7 @@ const UserInfo = (props) => {
               Company:{" "}
               {props.fetchedUser.company
                 ? props.fetchedUser.company
-                : "[Unemployed]"}
+                : "[No information]"}
             </p>
             <p className="user-info-text">
               Location:{" "}

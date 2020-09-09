@@ -3,11 +3,8 @@
   font-size: x-large;
 }
 
-.username-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -15,11 +12,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("https://cdn.wallpapersafari.com/93/74/aKifdU.jpg");
-  background-size: cover;
-  /* background-color: #f2fff7; */
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: #cbfff6;
 }
 
 code {
@@ -41,7 +34,7 @@ code {
   white-space: pre;
   list-style: none;
   border: 2px white solid;
-  /* background-color: #aefbd1; */
+  background-color: #36c1c9;
   box-shadow: inset 0 0 2000px rgba(270, 255, 255, 0.6);
   background-blend-mode: screen;
   padding: 10px;
@@ -55,7 +48,7 @@ code {
 }
 
 .App {
-  margin: 10px auto;
+  margin: auto;
 }
 
 .user-info-text:last-child {

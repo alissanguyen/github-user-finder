@@ -1,9 +1,10 @@
 import React from "react";
 import "./App.css";
-import emptyStateIllustration from "./undraw_Posts_re_ormv.svg";
+import emptyStateIllustration from "./undraw_Profile_data_re_v81r.svg";
+import logo from "./logo.png";
 
 function App() {
-  const [userInput, setUserInput] = React.useState("anveio");
+  const [userInput, setUserInput] = React.useState("");
 
   const [fetchedUsers, setFetchedUsers] = React.useState([]);
 
@@ -31,6 +32,7 @@ function App() {
   return (
     <div className="App">
       <nav id="top-nav">
+        <img id="gitspotter-logo" src={logo} alt=""></img>
         <form
           className="username-form"
           onSubmit={(e) => {
@@ -66,6 +68,7 @@ function App() {
         </ul>
       ) : (
         <EmptyState
+          id="empty-state-template"
           onLoadExampleButtonClick={onLoadExampleButtonClick}
         ></EmptyState>
       )}
@@ -76,16 +79,19 @@ function App() {
 const EmptyState = (props) => {
   return (
     <div>
-      <p>Type a user into the text box to find their GitHub profile</p>
+      <div id="empty-state-top-section">
+        <p id="empty-state-description-headline">Explore GitHub users you never known exist</p>
+        <p id="empty-state-description">Type a user into the text box to find their GitHub profile.</p>
+        <button
+          className="button"
+          onClick={() => {
+            props.onLoadExampleButtonClick();
+          }}
+        >
+          Load Example
+        </button>
+      </div>
       <img id="empty-state-illustration" src={emptyStateIllustration} alt="" />
-      <button
-        className="button"
-        onClick={() => {
-          props.onLoadExampleButtonClick();
-        }}
-      >
-        Load Example
-      </button>
     </div>
   );
 };

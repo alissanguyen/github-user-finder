@@ -1,15 +1,47 @@
 #top-nav {
   background-color: #113d5e;
   padding: 10px 0;
+  /* width: 260vw; */
+}
+
+#gitspotter-logo {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+
+#empty-state-top-section {
+
+}
+
+#empty-state-description-headline {
+    font-family: 'Oswald', sans-serif;
+    margin: 50px;
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+#empty-state-template {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+#empty-state-description {
+    font-family: 'Darker Grotesque', sans-serif;
+    margin: 50px;
+    font-size: 2rem;
+    font-weight: 400;
 }
 
 #empty-state-illustration {
-
+    flex: 1 1 auto;
+    padding: 0;
+    margin: 0;
 }
 
-#empty-state-button {
-
-}
 
 .button {
   color: #fff;
@@ -41,6 +73,8 @@
   color: white;
   text-transform: lowercase;
   font-size: 2.5rem;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .form-inputs-container {
@@ -48,7 +82,7 @@
   align-items: stretch;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 650px) {
   .username-form {
     position: relative;
   }
@@ -58,24 +92,27 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin-left: 400px;
   }
 }
 
-@media screen and (max-width: 900px) {
+/*Responsible for screen responsiveness (Change display if screen size (width) is smaller than 900 px*/
+@media screen and (max-width: 650px) {
   .form-inputs-container {
     position: fixed;
     bottom: 0px;
     background-color: #113d5e;
     padding: 10px 0;
-    width: 100vw;
-
+    width: 100%;
     display: flex;
     justify-content: center;
   }
 }
 
 #github-username-input {
+  width: 20rem;
   border-radius: 2px;
   border: 2px solid black;
   margin-right: 10px;
+  justify-content: right;
 }

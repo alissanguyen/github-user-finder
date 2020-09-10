@@ -32,7 +32,6 @@ function App() {
   return (
     <div className="App">
       <nav id="top-nav">
-        <img id="gitspotter-logo" src={logo} alt=""></img>
         <form
           className="username-form"
           onSubmit={(e) => {
@@ -41,9 +40,12 @@ function App() {
             getUserFromGithub(userInput);
           }}
         >
-          <label id="title" for="github-username-input">
-            GitHub spotter
-          </label>
+          <div>
+            <img id="gitspotter-logo" src={logo} alt=""></img>
+            <label id="title" for="github-username-input">
+              GitHub spotter
+            </label>
+          </div>
           <div className="form-inputs-container">
             <input
               id="github-username-input"
@@ -78,19 +80,22 @@ function App() {
 
 const EmptyState = (props) => {
   return (
-    <div>
-      <div id="empty-state-top-section">
-        <p id="empty-state-description-headline">Explore GitHub users you never known exist</p>
-        <p id="empty-state-description">Type a user into the text box to find their GitHub profile.</p>
-        <button
-          className="button"
-          onClick={() => {
-            props.onLoadExampleButtonClick();
-          }}
-        >
-          Load Example
-        </button>
-      </div>
+    <div id="empty-state">
+      <p id="empty-state-description-headline">
+        Explore GitHub users you never known exist
+      </p>
+      <p id="empty-state-description">
+        Type a user into the text box to find their GitHub profile.
+      </p>
+      <button
+        className="button"
+        id="example-button"
+        onClick={() => {
+          props.onLoadExampleButtonClick();
+        }}
+      >
+        Load Example
+      </button>
       <img id="empty-state-illustration" src={emptyStateIllustration} alt="" />
     </div>
   );

@@ -5,22 +5,16 @@
 }
 
 #gitspotter-logo {
-    position: absolute;
+    margin-left: 55px;
+    margin-right: 10px;
     width: 50px;
     height: 50px;
+    float: left; 
 }
 
-#empty-state-top-section {
-
+#empty-state {
+  
 }
-
-#empty-state-description-headline {
-    font-family: 'Oswald', sans-serif;
-    margin: 50px;
-    font-size: 2.5rem;
-    font-weight: 400;
-}
-
 #empty-state-template {
     position: relative;
     display: flex;
@@ -28,18 +22,35 @@
     flex: 1 1 auto;
     width: 100%;
 }
-
+#empty-state-description-headline {
+  font-family: 'Oswald', sans-serif;
+  margin: 50px;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
 #empty-state-description {
     font-family: 'Darker Grotesque', sans-serif;
     margin: 50px;
     font-size: 2rem;
     font-weight: 400;
+    margin-top: 0px;
+    margin-bottom: 5px;
 }
-
+#example-button {
+  margin-top: 20px;
+  margin-left: 55px;
+  position: fixed;
+  z-index: 2;
+}
 #empty-state-illustration {
+    position: fixed;
+    height: 600px;
+    width: 600px;
     flex: 1 1 auto;
     padding: 0;
-    margin: 0;
+    margin-left: 55px;
+    z-index: 1;
 }
 
 

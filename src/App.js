@@ -32,6 +32,11 @@ function App() {
   return (
     <div className="App">
       <nav id="top-nav">
+        <div className="app-title-container">
+          <img id="gitspotter-logo" src={logo} alt=""></img>
+          <h1 id="title">GitHub Spotter</h1>
+        </div>
+
         <form
           className="username-form"
           onSubmit={(e) => {
@@ -41,10 +46,7 @@ function App() {
           }}
         >
           <div>
-            <img id="gitspotter-logo" src={logo} alt=""></img>
-            <label id="title" for="github-username-input">
-              GitHub spotter
-            </label>
+            <label for="github-username-input"></label>
           </div>
           <div className="form-inputs-container">
             <input
@@ -62,18 +64,19 @@ function App() {
         </form>
       </nav>
 
-      {fetchedUsers.length > 0 ? (
-        <ul className="users-container">
-          {fetchedUsers.map((fetchedUser) => (
-            <UserInfo fetchedUser={fetchedUser} />
-          ))}
-        </ul>
-      ) : (
-        <EmptyState
-          id="empty-state-template"
-          onLoadExampleButtonClick={onLoadExampleButtonClick}
-        ></EmptyState>
-      )}
+      <div className="main-content-wrapper">
+        {fetchedUsers.length > 0 ? (
+          <ul className="users-container">
+            {fetchedUsers.map((fetchedUser) => (
+              <UserInfo fetchedUser={fetchedUser} />
+            ))}
+          </ul>
+        ) : (
+          <EmptyState
+            onLoadExampleButtonClick={onLoadExampleButtonClick}
+          ></EmptyState>
+        )}
+      </div>
     </div>
   );
 }
@@ -82,11 +85,12 @@ const EmptyState = (props) => {
   return (
     <div id="empty-state">
       <p id="empty-state-description-headline">
-        Explore GitHub users you never known exist
+        Explore GitHub users you never know exist
       </p>
       <p id="empty-state-description">
         Type a user into the text box to find their GitHub profile.
       </p>
+      <img id="empty-state-illustration" src={emptyStateIllustration} alt="" />
       <button
         className="button"
         id="example-button"
@@ -96,7 +100,6 @@ const EmptyState = (props) => {
       >
         Load Example
       </button>
-      <img id="empty-state-illustration" src={emptyStateIllustration} alt="" />
     </div>
   );
 };

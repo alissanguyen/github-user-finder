@@ -3,12 +3,32 @@ import "./App.css";
 import emptyStateIllustration from "./undraw_Profile_data_re_v81r.svg";
 import logo from "./logo.png";
 
+/**
+ * 1. What do we show the user while we're loading data from Github, for example, for users on slow connections on dialup in Ho Chi Minh city?
+ * 2. What do we show the user when there's an error from github for the user?
+ * 3. What do we show the user if they type in a user that already exists in our map of users.
+ *
+ *
+ * Considerations when writing async code:
+ *
+ * 1. Loading State ":)"
+ * 2. Failure State
+ * 3. Success State
+ *
+ */
+
 function App() {
   const [userInput, setUserInput] = React.useState("");
 
-  const [fetchedUsers, setFetchedUsers] = React.useState([]);
+  const [fetchedUsers, setFetchedUsers] = React.useState({});
+
+  /**
+   * We want to sort them by the time they were fetched from Github
+   */
 
   const getUserFromGithub = (username) => {
+    const timeOfRequest = Date.now();
+
     fetch(`https://api.github.com/users/${username}`)
       .then((result) => {
         if (result.ok === true) {
@@ -17,8 +37,16 @@ function App() {
           throw new Error("Invalid response.");
         }
       })
-      .then((json) => {
-        setFetchedUsers([json].concat(fetchedUsers));
+      .then((userInfoFromGithub) => {
+        setFetchedUsers((prev) => {
+          return {
+            ...prev,
+            [userInfoFromGithub.login]: {
+              ...userInfoFromGithub,
+              timeOfRequest,
+            },
+          };
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -28,6 +56,12 @@ function App() {
   function onLoadExampleButtonClick() {
     getUserFromGithub("alissanguyen");
   }
+
+  const fetchedUsersArray = Object.values(fetchedUsers).sort((a, b) => {
+    return b.timeOfRequest - a.timeOfRequest;
+  });
+
+  const fetchedUsersIsEmpty = fetchedUsersArray.length === 0;
 
   return (
     <div className="App">
@@ -46,7 +80,7 @@ function App() {
           }}
         >
           <div>
-            <label for="github-username-input"></label>
+            <label htmlFor="github-username-input"></label>
           </div>
           <div className="form-inputs-container">
             <input
@@ -65,9 +99,9 @@ function App() {
       </nav>
 
       <div className="main-content-wrapper">
-        {fetchedUsers.length > 0 ? (
+        {!fetchedUsersIsEmpty ? (
           <ul className="users-container">
-            {fetchedUsers.map((fetchedUser) => (
+            {fetchedUsersArray.map((fetchedUser) => (
               <UserInfo fetchedUser={fetchedUser} />
             ))}
           </ul>

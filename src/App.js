@@ -7,14 +7,14 @@ import logo from "./logo.png";
  * 1. What do we show the user while we're loading data from Github, for example, for users on slow connections on dialup in Ho Chi Minh city?
  * 2. What do we show the user when there's an error from github for the user?
  * 3. What do we show the user if they type in a user that already exists in our map of users.
- *
- *
+ * 
+ * 
  * Considerations when writing async code:
- *
- * 1. Loading State ":)"
+ * 
+ * 1. Loading State 
  * 2. Failure State
  * 3. Success State
- *
+ * 
  */
 
 function App() {
@@ -29,6 +29,10 @@ function App() {
   const getUserFromGithub = (username) => {
     const timeOfRequest = Date.now();
 
+    if (fetchedUsers[username.toLowerCase()] !== undefined) {
+      return;
+    }
+
     fetch(`https://api.github.com/users/${username}`)
       .then((result) => {
         if (result.ok === true) {
@@ -41,7 +45,7 @@ function App() {
         setFetchedUsers((prev) => {
           return {
             ...prev,
-            [userInfoFromGithub.login]: {
+            [userInfoFromGithub.login.toLowerCase()]: {
               ...userInfoFromGithub,
               timeOfRequest,
             },

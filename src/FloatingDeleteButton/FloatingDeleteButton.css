@@ -1,0 +1,13 @@
+.floating-delete-button {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  background-color: #57e1e4;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+
+.floating-delete-button::before {
+  content: "X";
+}

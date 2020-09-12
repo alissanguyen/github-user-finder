@@ -3,7 +3,7 @@ import "./App.css";
 import emptyStateIllustration from "./emptystate.svg";
 import logo from "./logo.png";
 import { LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";
-import errorIllustration from "./error.svg";
+import { FloatingDeleteButton } from "./FloatingDeleteButton/FloatingDeleteButton";
 
 /**
  * 1. What do we show the user while we're loading data from Github, for example, for users on slow connections on dialup in Ho Chi Minh city?
@@ -33,6 +33,14 @@ function App() {
   const [userInput, setUserInput] = React.useState("");
 
   const [fetchedUsers, setFetchedUsers] = React.useState({});
+
+  const handleDeleteSingleUser = (userId) => {
+    const fetchedUsersCopy = { ...fetchedUsers };
+
+    delete fetchedUsersCopy[userId.toLowerCase()];
+
+    setFetchedUsers(fetchedUsersCopy);
+  };
 
   /**
    * We want to sort them by the time they were fetched from Github
@@ -142,7 +150,10 @@ function App() {
         {!fetchedUsersIsEmpty ? (
           <ul className="users-container">
             {fetchedUsersArray.map((fetchedUser) => (
-              <UserInfo fetchedUser={fetchedUser} />
+              <UserInfo
+                onDelete={handleDeleteSingleUser}
+                fetchedUser={fetchedUser}
+              />
             ))}
           </ul>
         ) : (
@@ -182,13 +193,13 @@ const UserInfo = (props) => {
   if (props.fetchedUser.hasError) {
     return (
       <React.Fragment>
-        <li className="user-info word-wrap loading-user-info">
+        <li className="user-info word-wrap">
           Sorry there is an error when trying to find that user :(
         </li>
-        <img id="empty-state-illustration" src={errorIllustration} alt="" />
       </React.Fragment>
     );
   }
+
   if (props.fetchedUser.isLoading) {
     return (
       <li className="user-info word-wrap loading-user-info">
@@ -199,53 +210,65 @@ const UserInfo = (props) => {
 
   return (
     <li className="user-info word-wrap">
-      <a
-        href={props.fetchedUser.html_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="user-info-link"
+      <FloatingDeleteButton
+        userId={props.fetchedUser.login}
+        onClick={props.onDelete}
+      />
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "auto 1fr",
+          gridGap: 20,
+        }}
       >
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "auto 1fr",
-            gridGap: 20,
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <img
             src={props.fetchedUser.avatar_url}
-            style={{ height: 100, width: 100, borderRadius: 150 / 2 }}
+            style={{ height: 150, width: 150, borderRadius: "50%" }}
             alt=""
           />
-
-          <div className="info-text-container">
-            <h4
-              style={{
-                marginTop: 0,
-              }}
-            >
-              {props.fetchedUser.name
-                ? props.fetchedUser.name
-                : props.fetchedUser.login}
-            </h4>
-            <p className="user-info-text">
-              Company:{" "}
-              {props.fetchedUser.company
-                ? props.fetchedUser.company
-                : "[No information]"}
-            </p>
-            <p className="user-info-text">
-              Location:{" "}
-              {props.fetchedUser.location
-                ? props.fetchedUser.location
-                : "[No information]"}
-            </p>
-            <p className="user-info-text">
-              Bio: {props.fetchedUser.bio ? props.fetchedUser.bio : "N/A"}
-            </p>
-          </div>
+          <a
+            href={props.fetchedUser.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="user-info-link"
+          >
+            Visit Profile
+          </a>
         </div>
-      </a>
+
+        <div className="info-text-container">
+          <h4
+            style={{
+              marginTop: 0,
+            }}
+          >
+            {props.fetchedUser.name
+              ? props.fetchedUser.name
+              : props.fetchedUser.login}
+          </h4>
+          <p className="user-info-text">
+            Company:{" "}
+            {props.fetchedUser.company
+              ? props.fetchedUser.company
+              : "[No information]"}
+          </p>
+          <p className="user-info-text">
+            Location:{" "}
+            {props.fetchedUser.location
+              ? props.fetchedUser.location
+              : "[No information]"}
+          </p>
+          <p className="user-info-text">
+            Bio: {props.fetchedUser.bio ? props.fetchedUser.bio : "N/A"}
+          </p>
+        </div>
+      </div>
     </li>
   );
 };

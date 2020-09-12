@@ -152,3 +152,9 @@
   display: flex;
   justify-content: center;
 }
+
+.loading-user-info {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}

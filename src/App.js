@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import emptyStateIllustration from "./undraw_Profile_data_re_v81r.svg";
 import logo from "./logo.png";
+import { LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";
 
 /**
  * 1. What do we show the user while we're loading data from Github, for example, for users on slow connections on dialup in Ho Chi Minh city?
@@ -10,11 +11,21 @@ import logo from "./logo.png";
  * 
  * 
  * Considerations when writing async code:
- * 
- * 1. Loading State 
+ *
+ * 1. Loading State
  * 2. Failure State
  * 3. Success State
  * 
+ */
+
+/**
+ * interface FetchedUser {
+ *   avatar_url: string;
+ *   login: string // primary key
+ *   bio: string;
+ *   timeOfRequest: number;
+ *   isLoading: boolean;
+ * }
  */
 
 function App() {
@@ -33,6 +44,15 @@ function App() {
       return;
     }
 
+    setFetchedUsers((prev) => {
+      return {
+        ...prev,
+        [username.toLowerCase()]: {
+          isLoading: true,
+        },
+      };
+    });
+
     fetch(`https://api.github.com/users/${username}`)
       .then((result) => {
         if (result.ok === true) {
@@ -48,12 +68,24 @@ function App() {
             [userInfoFromGithub.login.toLowerCase()]: {
               ...userInfoFromGithub,
               timeOfRequest,
+              isLoading: false,
             },
           };
         });
       })
       .catch((error) => {
+        /**
+         * TODO: Show something in the UI to let them know the user doesn't exist;
+         */
         console.log(error);
+        setFetchedUsers((prev) => {
+          return {
+            ...prev,
+            [username.toLowerCase()]: {
+              isLoading: false,
+            },
+          };
+        });
       });
   };
 
@@ -74,7 +106,6 @@ function App() {
           <img id="gitspotter-logo" src={logo} alt=""></img>
           <h1 id="title">GitHub Spotter</h1>
         </div>
-
         <form
           className="username-form"
           onSubmit={(e) => {
@@ -143,6 +174,14 @@ const EmptyState = (props) => {
 };
 
 const UserInfo = (props) => {
+  if (props.fetchedUser.isLoading) {
+    return (
+      <li className="user-info word-wrap loading-user-info">
+        <LoadingSpinner />
+      </li>
+    );
+  }
+
   return (
     <li className="user-info word-wrap">
       <a

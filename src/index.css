@@ -22,10 +22,10 @@ code {
 .users-container {
   padding-left: 0px;
   margin: 15px auto;
-  max-width: 800px;
   display: flex;
   flex-direction: column;
   background: inherit;
+  width: 100%;
 }
 
 .user-info {

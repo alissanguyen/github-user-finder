@@ -1,21 +1,22 @@
 import React from "react";
 import "./App.css";
-import emptyStateIllustration from "./undraw_Profile_data_re_v81r.svg";
+import emptyStateIllustration from "./emptystate.svg";
 import logo from "./logo.png";
 import { LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";
+import errorIllustration from "./error.svg";
 
 /**
  * 1. What do we show the user while we're loading data from Github, for example, for users on slow connections on dialup in Ho Chi Minh city?
  * 2. What do we show the user when there's an error from github for the user?
  * 3. What do we show the user if they type in a user that already exists in our map of users.
- * 
- * 
+ *
+ *
  * Considerations when writing async code:
  *
  * 1. Loading State
- * 2. Failure State
+ * 2. Failure State (error)
  * 3. Success State
- * 
+ *
  */
 
 /**
@@ -83,6 +84,7 @@ function App() {
             ...prev,
             [username.toLowerCase()]: {
               isLoading: false,
+              hasError: true,
             },
           };
         });
@@ -103,9 +105,14 @@ function App() {
     <div className="App">
       <nav id="top-nav">
         <div className="app-title-container">
-          <img id="gitspotter-logo" src={logo} alt=""></img>
-          <h1 id="title">GitHub Spotter</h1>
+          <div className="app-elements-grid-layout">
+            <img id="gitspotter-logo" src={logo} alt=""></img>
+            <h1 id="title">GitHub Spotter</h1>
+          </div>
         </div>
+      </nav>
+
+      <div className="main-content-wrapper">
         <form
           className="username-form"
           onSubmit={(e) => {
@@ -131,9 +138,7 @@ function App() {
             </button>
           </div>
         </form>
-      </nav>
 
-      <div className="main-content-wrapper">
         {!fetchedUsersIsEmpty ? (
           <ul className="users-container">
             {fetchedUsersArray.map((fetchedUser) => (
@@ -174,6 +179,16 @@ const EmptyState = (props) => {
 };
 
 const UserInfo = (props) => {
+  if (props.fetchedUser.hasError) {
+    return (
+      <React.Fragment>
+        <li className="user-info word-wrap loading-user-info">
+          Sorry there is an error when trying to find that user :(
+        </li>
+        <img id="empty-state-illustration" src={errorIllustration} alt="" />
+      </React.Fragment>
+    );
+  }
   if (props.fetchedUser.isLoading) {
     return (
       <li className="user-info word-wrap loading-user-info">

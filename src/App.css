@@ -12,15 +12,13 @@
 #empty-state {
   display: flex;
   flex-direction: column;
-
-  padding: 10px;
 }
 
 .app-title-container {
-  display: grid;
-  grid-template-columns: 50px 1fr;
-  grid-column-gap: 5px;
-  flex: 1;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 #empty-state-description-headline {
@@ -84,13 +82,16 @@
   font-family: "Share Tech Mono", monospace;
   color: white;
   text-transform: lowercase;
-  font-size: 2.5rem;
-  flex-direction: row;
-  justify-content: flex-start;
+  font-size: 2rem;
   margin: 0;
+  align-self: center;
 }
 
 @media screen and (min-width: 700px) {
+  #title {
+    font-size: 2.5rem;
+  }
+
   #empty-state {
     position: relative;
   }
@@ -123,27 +124,8 @@
   height: min-content;
   display: flex;
   align-items: stretch;
-}
-
-/*Responsible for screen responsiveness (Change display if screen size (width) is smaller than 700 px*/
-@media screen and (max-width: 700px) {
-  .form-inputs-container {
-    position: fixed;
-    bottom: 0px;
-    background-color: #113d5e;
-    padding: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    left: 0px;
-  }
-}
-
-#github-username-input {
-  flex: 1;
-  border-radius: 2px;
-  margin-right: 10px;
-  justify-content: right;
+  width: 100%;
+  padding: 20px 0;
 }
 
 .main-content-wrapper {
@@ -151,10 +133,24 @@
   max-width: 700px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  padding: 10px;
 }
 
 .loading-user-info {
   display: flex;
   width: 100%;
   justify-content: center;
+}
+
+#github-username-input {
+  flex: 1;
+}
+
+.app-elements-grid-layout {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  grid-column-gap: 10px;
+  flex: 1;
+  margin: auto;
 }

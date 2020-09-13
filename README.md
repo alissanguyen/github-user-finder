@@ -9,8 +9,8 @@ URL [https://githubspotter.alissanguyen.dev](https://githubspotter.alissanguyen.
 
 ## Acknowledgements
 
-This is inspired from https://github.com/abraham/twitter-user from the user abraham on GitHub and The GitHub Cards App by Samer Buna from his React: Getting Started course on Pluralsight.
+This is inspired from https://github.com/abraham/twitter-user from the user abraham on GitHub and [The GitHub Cards App](https://app.pluralsight.com/player?course=react-js-getting-started&author=samer-buna&name=react-js-getting-started-m3&clip=0&mode=live) by Samer Buna from his [React: Getting Started](https://app.pluralsight.com/library/courses/react-js-getting-started/table-of-contents)
+ course on Pluralsight.
 
-[The GitHub Cards App](https://app.pluralsight.com/player?course=react-js-getting-started&author=samer-buna&name=react-js-getting-started-m3&clip=0&mode=live)
-[React: Getting Started](https://app.pluralsight.com/library/courses/react-js-getting-started/table-of-contents)
+
 

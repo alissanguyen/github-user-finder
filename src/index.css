@@ -1,5 +1,6 @@
 body {
-  font-family: "Darker Grotesque", sans-serif;
+  font-family: 'Pontano Sans', sans-serif;
+  /* font-family: "Darker Grotesque", sans-serif; */
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -9,18 +10,20 @@ body {
 }
 
 button {
-  font-family: "Darker Grotesque", sans-serif;
+  font-family: 'Pontano Sans', sans-serif;
+  /* font-family: "Darker Grotesque", sans-serif; */
 }
 
 input {
-  font-family: "Darker Grotesque", sans-serif;
+  font-family: 'Pontano Sans', sans-serif;
+  /* font-family: "Darker Grotesque", sans-serif; */
   font-size: 1.2rem;
   padding: 0px 10px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: 'Pontano Sans', sans-serif;
+  /* font-family: "Darker Grotesque", sans-serif; */
 }
 
 .users-container {
@@ -34,8 +37,8 @@ code {
 
 .user-info {
   position: relative;
-  font-size: 25px;
-  line-height: 0.9em;
+  font-size: 20px;
+  line-height: 1.1em;
   white-space: pre;
   list-style: none;
   border: 2px #4ac3d7 solid;

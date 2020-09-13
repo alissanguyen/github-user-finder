@@ -191,7 +191,7 @@ const EmptyState = (props) => {
   return (
     <div id="empty-state">
       <p id="empty-state-description-headline">
-        Explore GitHub users you never know existed
+        Explore GitHub users you never knew existed
       </p>
       <p id="empty-state-description">
         Type a user into the text box to find their GitHub profile.

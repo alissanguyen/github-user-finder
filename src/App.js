@@ -49,15 +49,20 @@ function App() {
   const getUserFromGithub = (username) => {
     const timeOfRequest = Date.now();
 
-    if (fetchedUsers[username.toLowerCase()] !== undefined) {
+    const userId = username.toLowerCase();
+
+    if (fetchedUsers[userId] !== undefined) {
       return;
     }
 
     setFetchedUsers((prev) => {
       return {
         ...prev,
-        [username.toLowerCase()]: {
+        [userId]: {
           isLoading: true,
+          hasError: false,
+          userId,
+          timeOfRequest,
         },
       };
     });
@@ -72,25 +77,38 @@ function App() {
       })
       .then((userInfoFromGithub) => {
         setFetchedUsers((prev) => {
+          if (!prev[userId]) {
+            /**
+             * If the user deleted this github card during the request, do nothing
+             */
+            return prev;
+          }
+
           return {
             ...prev,
-            [userInfoFromGithub.login.toLowerCase()]: {
+            [userId]: {
+              ...prev[userId],
               ...userInfoFromGithub,
-              timeOfRequest,
               isLoading: false,
+              hasError: false,
             },
           };
         });
       })
       .catch((error) => {
-        /**
-         * TODO: Show something in the UI to let them know the user doesn't exist;
-         */
-        console.log(error);
+        console.error(error);
         setFetchedUsers((prev) => {
+          if (!prev[userId]) {
+            /**
+             * If the user deleted this github card during the request, do nothing
+             */
+            return prev;
+          }
+
           return {
             ...prev,
-            [username.toLowerCase()]: {
+            [userId]: {
+              ...prev[userId],
               isLoading: false,
               hasError: true,
             },
@@ -153,6 +171,7 @@ function App() {
           <ul className="users-container">
             {fetchedUsersArray.map((fetchedUser) => (
               <UserInfo
+                key={fetchedUser.userId}
                 onDelete={handleDeleteSingleUser}
                 fetchedUser={fetchedUser}
               />
@@ -196,7 +215,11 @@ const UserInfo = (props) => {
     return (
       <React.Fragment>
         <li className="user-info word-wrap">
-          Sorry there is an error when trying to find that user :(
+          <p>Sorry there was an error when trying to find that user :(</p>
+          <FloatingDeleteButton
+            userId={props.fetchedUser.userId}
+            onClick={props.onDelete}
+          ></FloatingDeleteButton>
         </li>
       </React.Fragment>
     );
@@ -205,6 +228,10 @@ const UserInfo = (props) => {
   if (props.fetchedUser.isLoading) {
     return (
       <li className="user-info word-wrap loading-user-info">
+        <FloatingDeleteButton
+          userId={props.fetchedUser.userId}
+          onClick={props.onDelete}
+        />
         <LoadingSpinner />
       </li>
     );
@@ -213,7 +240,7 @@ const UserInfo = (props) => {
   return (
     <li className="user-info word-wrap">
       <FloatingDeleteButton
-        userId={props.fetchedUser.login}
+        userId={props.fetchedUser.userId}
         onClick={props.onDelete}
       />
       <div

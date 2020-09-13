@@ -137,6 +137,8 @@ function App() {
               id="github-username-input"
               placeholder="Example: alissanguyen"
               value={userInput}
+              pattern=".*\S.*"
+              required
               onChange={(e) => {
                 setUserInput(e.target.value);
               }}
@@ -170,7 +172,7 @@ const EmptyState = (props) => {
   return (
     <div id="empty-state">
       <p id="empty-state-description-headline">
-        Explore GitHub users you never know exist
+        Explore GitHub users you never know existed
       </p>
       <p id="empty-state-description">
         Type a user into the text box to find their GitHub profile.

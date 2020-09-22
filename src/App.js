@@ -201,7 +201,7 @@ const EmptyState = (props) => {
         className="button"
         id="example-button"
         onClick={() => {
-          props.onLoadExampleButtonClick();
+          props.onLoadExampleButtonClick(); 
         }}
       >
         Load Example

@@ -2,6 +2,8 @@
 
 This website is designed to let people find GitHub users by their usernames.
 
+If you don't know how to get started, click on the "Load Example" button below! :)
+
 ![GitHub Spotter Template Example](https://i.imgur.com/h9qn47c.png)
 
 URL [https://githubspotter.alissanguyen.dev](https://githubspotter.alissanguyen.dev)

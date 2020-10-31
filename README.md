@@ -1,12 +1,22 @@
 ![GitHub Spotter](https://i.imgur.com/sARWP3M.png)
 
-This website is designed to let people find GitHub users by their usernames.
+URL https://githubspotter.alissanguyen.dev
 
-If you don't know how to get started, click on the "Load Example" button below! :)
+## About
+GitHub Spotter is designed to let people find GitHub users by their usernames. You can type in a random name and you might surprisingly find a Git user with that same username!
 
+GitHub Spotter is open source with a [public repository][github-user-finder] on GitHub.
+
+
+## What You Expect to See
 ![GitHub Spotter Template Example](https://i.imgur.com/h9qn47c.png)
 
-URL [https://githubspotter.alissanguyen.dev](https://githubspotter.alissanguyen.dev)
+## How to Get Started
+If you don't know how to get started, click on the "Load Example" button! :)
+
+
+[//]: # "These are reference links used in the body of this note."
+[github-user-finder]: https://github.com/atlassian/react-beautiful-dnd
 
 
 ## Acknowledgements
